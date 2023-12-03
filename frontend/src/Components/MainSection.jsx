@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FamousHotel, cityData, propertyType } from "../Data";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const MainSection = () => {
+  const {setSearchTerm} = useContext(AuthContext)
+  const navigate = useNavigate()
+  const searchCityHandler = (city) => {
+    setSearchTerm(city)
+    navigate('/hotels')
+  }
   return (
     <div className="w-10/12 ml-20 p-2">
       <div className="text-2xl font-medium mt-4">Explore India</div>
       <div className="whitespace-nowrap overflow-x-auto no-srollbar">
         {cityData.map((item) => (
-          <div className="inline-block mt-4 mr-4">
+          <div onClick={() => {searchCityHandler(item.name)}} className="inline-block mt-4 mr-4 cursor-pointer">
             <img className="border rounded-lg" src={item.image} alt="" />
             <div className="font-medium mt-2">{item.name}</div>
           </div>
@@ -17,7 +25,7 @@ const MainSection = () => {
       <div className="text-2xl font-medium mt-12 mb-4">Browse by property type</div>
       <div className="whitespace-nowrap overflow-x-auto no-srollbar">
         {propertyType.map((item) => (
-          <div className="inline-block mt-4 mr-4">
+          <div onClick={() => {searchCityHandler(item.name)}} className="inline-block mt-4 mr-4 cursor-pointer">
             <img className="border rounded-lg" src={item.image} alt="" />
             <div className="font-medium mt-2">{item.name}</div>
           </div>

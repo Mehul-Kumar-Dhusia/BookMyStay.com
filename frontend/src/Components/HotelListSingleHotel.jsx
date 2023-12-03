@@ -1,6 +1,6 @@
 import React from "react";
 
-const HotelListSingleHotel = () => {
+const HotelListSingleHotel = ({item}) => {
   return (
     <div className="border border-gray-200 rounded-lg flex mb-4 p-4 gap-6 justify-between cursor-pointer">
       <div className="flex gap-10">
@@ -13,7 +13,7 @@ const HotelListSingleHotel = () => {
         </div>
         <div className="mr-10">
           <div className="text-blue-800 text-2xl font-medium mb-2">
-            Tower Street Apartment
+            {item.name}
           </div>
           <p className="text-sm mb-2">500m from center</p>
           <button className="p-1 bg-green-600 text-white text-sm mb-2 rounded-sm">

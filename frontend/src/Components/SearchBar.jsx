@@ -1,11 +1,15 @@
 import { CalendarMonth, HotelOutlined, Person } from "@mui/icons-material";
 import { DateRange } from "react-date-range";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const SearchBar = () => {
+  const {setSearchTerm} = useContext(AuthContext)
+  const navigate = useNavigate() ;
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -15,6 +19,7 @@ const SearchBar = () => {
   ]);
   const [openDate, setOpenDate] = useState(false);
   const [openRooms, setOpenRooms] = useState(false);
+  const [city , setCity] = useState("")
   const [roomsOption, setRoomsOption] = useState({
     adult: 1,
     children: 0,
@@ -28,6 +33,12 @@ const SearchBar = () => {
         }
     })
   }
+
+  const SearchHandler = async () => {
+    setSearchTerm(city)
+    navigate('/hotels')
+
+  }
   return (
     <div className="w-10/12 absolute -bottom-7">
       <div className="flex items-center border-4 rounded-md border-amber-400 w-full gap-1 bg-amber-400 text-black h-14">
@@ -37,6 +48,7 @@ const SearchBar = () => {
             className="border-0 w-full focus:ring-0"
             type="text"
             placeholder="Where are you going ?"
+            onChange={(e) => {setCity(e.target.value)}}
           />
         </div>
 
@@ -123,7 +135,7 @@ const SearchBar = () => {
           )}
         </div>
 
-        <div className="bg-blue-500 text-white px-6 py-2 text-center text-xl font-medium rounded-md h-full border border-blue-500 cursor-pointer hover:bg-blue-600">
+        <div onClick={SearchHandler} className="bg-blue-500 text-white px-6 py-2 text-center text-xl font-medium rounded-md h-full border border-blue-500 cursor-pointer hover:bg-blue-600">
           Search
         </div>
       </div>
