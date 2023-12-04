@@ -61,4 +61,13 @@ router.get("/city", async (req, res) => {
   }
 });
 
+router.get("/type", async (req, res) => {
+  try {
+    const hotelList = await Hotel.find({type : req.query.type}) ;
+    res.status(200).json(hotelList) ;
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

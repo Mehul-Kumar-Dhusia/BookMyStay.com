@@ -4,6 +4,7 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [searchTerm , setSearchTerm] = useState("")
+  const [typeSearch , setTypeSearch] = useState("")
   const [currentUser , setCurrentUser] = useState(null)
   const [singleHotelData , setSingleHotelData] = useState(null)
   const [text , setText] = useState("")
@@ -27,7 +28,9 @@ export const AuthContextProvider = ({ children }) => {
         date,
         setDate,
         text,
-        setText
+        setText,
+        typeSearch,
+        setTypeSearch
       }}
     >
       {children}
