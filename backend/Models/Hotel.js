@@ -32,10 +32,6 @@ const HotelSchema = new mongoose.Schema({
     //     min : 0,
     //     max : 5
     // },
-    // distance : {
-    //     type : Number,
-    //     required : true 
-    // },
     // cheapestPrice : {
     //     type : Number
     // },

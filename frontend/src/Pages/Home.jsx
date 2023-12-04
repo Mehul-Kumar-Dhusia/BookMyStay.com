@@ -7,7 +7,7 @@ import Email from '../Components/Email'
 const Home = () => {
   return (
     <div>
-       <Navbar />
+       <Navbar show = {true} />
        <Header />
        <MainSection />
        <Email />

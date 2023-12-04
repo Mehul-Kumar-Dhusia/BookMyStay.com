@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../Components/Navbar";
 import Header from "../Components/Header";
 import { LocationOn } from "@mui/icons-material";
 import Email from "../Components/Email";
 import { SingleHotelImage } from "../Data";
+import { AuthContext } from "../Context/AuthContext";
 
 const SingleHotel = () => {
+  const {singleHotelData} = useContext(AuthContext)
   return (
     <div>
       <Navbar />
@@ -15,7 +17,7 @@ const SingleHotel = () => {
           <div className="flex justify-between items-center mb-10">
             <div>
               <p className="text-4xl font-medium mb-4">
-                Tower Street Apartment
+                {singleHotelData.name}
               </p>
               <p className="mb-1 text-sm">
                 <LocationOn />

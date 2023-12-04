@@ -5,6 +5,7 @@ import Login from './Pages/Login'
 import Profile from './Pages/Profile'
 import HotelList from "./Pages/HotelList";
 import SingleHotel from "./Pages/SingleHotel";
+import CreateHotel from "./Pages/CreateHotel";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
          <Route path="/profile" element={<Profile />} />
          <Route path="/hotels" element={<HotelList />} />
          <Route path="/hotels/:id" element={<SingleHotel />} />
+         <Route path="/createHotel" element={<CreateHotel />} />
        </Routes>
     </div>
   );

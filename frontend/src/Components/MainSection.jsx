@@ -32,7 +32,7 @@ const MainSection = () => {
         ))}
       </div>
 
-      <div className="text-2xl font-medium mt-12 mb-4">Explore India</div>
+      {/* <div className="text-2xl font-medium mt-12 mb-4">Explore India</div>
       <div className="whitespace-nowrap overflow-x-auto no-srollbar">
         {FamousHotel.map((item) => (
           <div className="inline-block mt-4 mr-4">
@@ -43,7 +43,7 @@ const MainSection = () => {
             <div>{item.rating}</div>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

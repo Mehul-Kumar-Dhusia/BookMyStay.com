@@ -9,20 +9,23 @@ import { AuthContext } from '../Context/AuthContext'
 
 const HotelList = () => {
   const [hotelList , setHotelList] = useState([]) ;
-  const {searchTerm} = useContext(AuthContext)
+  const {searchTerm , text} = useContext(AuthContext)
+  
+
   useEffect(() => {
     const getHotelsData = async () => {
-      const response = await axios.get(`/hotels/city/?city=${searchTerm}`)
+      const response = await axios.get(`/hotels/city/?city=${(text !== "" ? text : searchTerm)}`)
       setHotelList(response.data)
     }
     getHotelsData() ;
-  } , [])
+  } , [searchTerm , text])
+
   return (
     <div>
      <Navbar />
-     <Header type = "doNotShow" />
+     {/* <Header type = "doNotShow" /> */}
      <div>
-      <div className='flex w-10/12 m-auto gap-10'>
+      <div className='flex w-10/12 m-auto gap-10 mt-5'>
         <HotelListSearch />
         <div className='w-9/12'>
           {hotelList.map((item) => (
@@ -31,7 +34,7 @@ const HotelList = () => {
         </div>
       </div>
      </div>
-     <Email />
+     {/* <Email /> */}
     </div>
   )
 }

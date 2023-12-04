@@ -8,37 +8,31 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
 
 const SearchBar = () => {
-  const {setSearchTerm} = useContext(AuthContext)
-  const navigate = useNavigate() ;
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  const { setSearchTerm, date, setDate } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [openDate, setOpenDate] = useState(false);
   const [openRooms, setOpenRooms] = useState(false);
-  const [city , setCity] = useState("")
+  const [city, setCity] = useState("");
   const [roomsOption, setRoomsOption] = useState({
     adult: 1,
     children: 0,
     room: 1,
   });
 
-  const handleClick = (name , operation) => {
-    setRoomsOption(prev => {
-        return {
-            ...prev , [name] : operation === "d" ? roomsOption[name]-1 : roomsOption[name] + 1 
-        }
-    })
-  }
+  const handleClick = (name, operation) => {
+    setRoomsOption((prev) => {
+      return {
+        ...prev,
+        [name]:
+          operation === "d" ? roomsOption[name] - 1 : roomsOption[name] + 1,
+      };
+    });
+  };
 
   const SearchHandler = async () => {
-    setSearchTerm(city)
-    navigate('/hotels')
-
-  }
+    setSearchTerm(city);
+    navigate("/hotels");
+  };
   return (
     <div className="w-10/12 absolute -bottom-7">
       <div className="flex items-center border-4 rounded-md border-amber-400 w-full gap-1 bg-amber-400 text-black h-14">
@@ -48,7 +42,9 @@ const SearchBar = () => {
             className="border-0 w-full focus:ring-0"
             type="text"
             placeholder="Where are you going ?"
-            onChange={(e) => {setCity(e.target.value)}}
+            onChange={(e) => {
+              setCity(e.target.value);
+            }}
           />
         </div>
 
@@ -69,7 +65,10 @@ const SearchBar = () => {
             <DateRange
               className="absolute w-full top-11 mt-2 left-0 shadow-lg"
               editableDateInputs={true}
-              onChange={(item) => setDate([item.selection])}
+              onChange={(item) => {
+                setDate([item.selection]);
+                setOpenDate(!openDate);
+              }}
               moveRangeOnFirstSelection={false}
               ranges={date}
             />
@@ -97,45 +96,86 @@ const SearchBar = () => {
               <div className="flex justify-between p-4">
                 <span>Adults</span>
                 <div className="flex justify-between items-center border-2 border-gray-200 rounded-md w-32 px-4 py-2">
-                    <span onClick={()=>{handleClick("adult" , "d")}}>
-                        <button disabled={roomsOption.adult <= 1} className="disabled:cursor-not-allowed">-</button>
-                    </span>
-                    <span>{roomsOption.adult}</span>
-                    <span onClick={()=>{handleClick("adult" , "i")}}>
-                        <button>+</button>
-                    </span>
+                  <span
+                    onClick={() => {
+                      handleClick("adult", "d");
+                    }}
+                  >
+                    <button
+                      disabled={roomsOption.adult <= 1}
+                      className="disabled:cursor-not-allowed"
+                    >
+                      -
+                    </button>
+                  </span>
+                  <span>{roomsOption.adult}</span>
+                  <span
+                    onClick={() => {
+                      handleClick("adult", "i");
+                    }}
+                  >
+                    <button>+</button>
+                  </span>
                 </div>
               </div>
               <div className="flex justify-between p-4">
                 <span>Children</span>
                 <div className="flex justify-between items-center border-2 border-gray-200 rounded-md w-32 px-4 py-2">
-                    <span onClick={()=>{handleClick("children" , "d")}}>
-                        <button disabled={roomsOption.children <= 0} className='disabled:cursor-not-allowed'>-</button>
-                    </span>
-                    <span>{roomsOption.children}</span>
-                    <span onClick={()=>{handleClick("children" , "i")}}>
-                        <button>+</button>
-                    </span>
+                  <span
+                    onClick={() => {
+                      handleClick("children", "d");
+                    }}
+                  >
+                    <button
+                      disabled={roomsOption.children <= 0}
+                      className="disabled:cursor-not-allowed"
+                    >
+                      -
+                    </button>
+                  </span>
+                  <span>{roomsOption.children}</span>
+                  <span
+                    onClick={() => {
+                      handleClick("children", "i");
+                    }}
+                  >
+                    <button>+</button>
+                  </span>
                 </div>
               </div>
               <div className="flex justify-between p-4">
                 <span>Rooms</span>
                 <div className="flex justify-between items-center border-2 border-gray-200 rounded-md w-32 px-4 py-2">
-                    <span onClick={()=>{handleClick("room" , "d")}}>
-                        <button disabled={roomsOption.room <= 1} className="disabled:cursor-not-allowed">-</button>
-                    </span>
-                    <span>{roomsOption.room}</span>
-                    <span onClick={()=>{handleClick("room" , "i")}}>
-                        <button>+</button>
-                    </span>
+                  <span
+                    onClick={() => {
+                      handleClick("room", "d");
+                    }}
+                  >
+                    <button
+                      disabled={roomsOption.room <= 1}
+                      className="disabled:cursor-not-allowed"
+                    >
+                      -
+                    </button>
+                  </span>
+                  <span>{roomsOption.room}</span>
+                  <span
+                    onClick={() => {
+                      handleClick("room", "i");
+                    }}
+                  >
+                    <button>+</button>
+                  </span>
                 </div>
               </div>
-
             </div>
           )}
         </div>
 
-        <div onClick={SearchHandler} className="bg-blue-500 text-white px-6 py-2 text-center text-xl font-medium rounded-md h-full border border-blue-500 cursor-pointer hover:bg-blue-600">
+        <div
+          onClick={SearchHandler}
+          className="bg-blue-500 text-white px-6 py-2 text-center text-xl font-medium rounded-md h-full border border-blue-500 cursor-pointer hover:bg-blue-600"
+        >
           Search
         </div>
       </div>
