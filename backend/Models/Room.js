@@ -17,7 +17,10 @@ const RoomSchema = new mongoose.Schema({
         type : [String]
     },
     bookedDate : {
-        type : [Number]
+        type : [{
+            startDate : Number,
+            endDate : Number
+        }]
     }
 });
 

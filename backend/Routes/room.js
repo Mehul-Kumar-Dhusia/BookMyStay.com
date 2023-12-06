@@ -33,6 +33,18 @@ router.get('/' , async (req , res) => {
     }
 })
 
+router.put('/booking/:id' , async (req , res) => {
+    try{
+        await Room.findByIdAndUpdate(req.params.id , {
+            $push : {bookedDate : req.body}
+        })
+        res.status(200).json("Updated Successfully")
+
+    }catch(err){
+        res.status(500).json(err)
+    }
+})
+
 // Get All Room Data For the particualar Hotel
 router.get("/:hotelId" , async (req,res) => {
     try{

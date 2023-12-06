@@ -3,17 +3,16 @@ import Navbar from "../Components/Navbar";
 import Header from "../Components/Header";
 import { LocationOn } from "@mui/icons-material";
 import Email from "../Components/Email";
-import { SingleHotelImage } from "../Data";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
-import { format } from "date-fns";
 import PriceComponent from "../Components/PriceComponent";
 
 const SingleHotel = () => {
-  const { singleHotelData, currentUser, date } = useContext(AuthContext);
+  const { singleHotelData, date } = useContext(AuthContext);
   const [roomsData, setRoomsData] = useState([]);
   const [currentRoomData, setCurrentRoomData] = useState(null);
-  const arr = ["King Size", "Delux", "Ultra Delux"];
+  const [isAvail , setIsAvail] = useState(true)
+
   useEffect(() => {
     const getRoomsData = async () => {
       const response = await axios.get("/rooms/" + singleHotelData._id);
@@ -21,6 +20,28 @@ const SingleHotel = () => {
     };
     getRoomsData();
   }, [singleHotelData]);
+
+  const gettingRoomDetailHandler = async (item) => {
+    setIsAvail(true)
+    setCurrentRoomData(item);
+    let n = item.bookedDate.length ;
+    const checkingStartDate = date[0].startDate.getTime() ;
+    const checkingEndDate = date[0].endDate.getTime()
+    let flag = true ;
+    for(let i = 0 ; i < n ; i++){
+      const bookedStartDate = item.bookedDate[i].startDate ;
+      const bookedEndDate = item.bookedDate[i].endDate ;
+      if(checkingEndDate < bookedStartDate || checkingStartDate > bookedEndDate){
+        continue ;
+      }
+      else{
+        flag = false ;
+        break ;
+      }
+    }
+    setIsAvail(flag)
+  }
+
   return (
     <div>
       <Navbar />
@@ -62,9 +83,7 @@ const SingleHotel = () => {
             <p className="mt-5 mb-2 font-semibold">Room Type</p>
             {roomsData.map((item) => (
               <button
-                onClick={() => {
-                  setCurrentRoomData(item);
-                }}
+                onClick={() => {gettingRoomDetailHandler(item)}}
                 className="border border-gray-300 py-1 px-2 mr-2 rounded-lg hover:bg-gray-100"
               >
                 {item.name}
@@ -79,7 +98,7 @@ const SingleHotel = () => {
           )}
         </div>
 
-        <PriceComponent item={currentRoomData} />
+        <PriceComponent item={currentRoomData} isAvail = {isAvail} />
       </div>
       <Email />
     </div>
