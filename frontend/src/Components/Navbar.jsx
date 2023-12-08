@@ -16,10 +16,11 @@ const Navbar = ({show}) => {
           <Link to='/createHotel'>
           {show && <span className="text-xl cursor-pointer">List Your Property</span>}
           </Link>
-
+          <Link to='/profile'>
           <button className="px-3 py-2 border bg-white text-blue-800 font-medium rounded-full text-2xl ml-5">
-            {currentUser.username[0].toUpperCase()+currentUser.username[1].toUpperCase()}
+            {currentUser.username[0].toUpperCase()}
           </button>
+          </Link>
 
 
 

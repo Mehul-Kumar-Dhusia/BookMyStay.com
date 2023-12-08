@@ -6,17 +6,20 @@ import Email from "../Components/Email";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 import PriceComponent from "../Components/PriceComponent";
+import Success from "../Components/Success";
 
 const SingleHotel = () => {
-  const { singleHotelData, date } = useContext(AuthContext);
+  const { singleHotelData, date , showSuccessBox} = useContext(AuthContext);
   const [roomsData, setRoomsData] = useState([]);
   const [currentRoomData, setCurrentRoomData] = useState(null);
   const [isAvail , setIsAvail] = useState(true)
 
   useEffect(() => {
     const getRoomsData = async () => {
-      const response = await axios.get("/rooms/" + singleHotelData._id);
-      setRoomsData(response.data);
+      if(singleHotelData !== null){
+        const response = await axios.get("/rooms/" + singleHotelData._id);
+        setRoomsData(response.data);
+      }
     };
     getRoomsData();
   }, [singleHotelData]);
@@ -43,15 +46,16 @@ const SingleHotel = () => {
   }
 
   return (
-    <div>
+    <div className={`relative`}>
+      <div className={`${showSuccessBox && "opacity-40"}`}>
       <Navbar />
       <Header type="doNotShow" />
       <div className="w-11/12 m-auto p-2 flex gap-5 h-full justify-between">
         <div className="">
-          <p className="text-3xl font-semibold">
+          {singleHotelData && <p className="text-3xl font-semibold">
             {singleHotelData.name} | 225 Sohabaitya Bagh, Prayagraj, Uttar
             Pradesh
-          </p>
+          </p>}
           <div className="flex items-center mt-5">
             <LocationOn />
             <span>225 Sohabaitya Bagh, Prayagraj, Uttar Pradesh</span>
@@ -81,7 +85,7 @@ const SingleHotel = () => {
           </div>
           <div className="mt-3">
             <p className="mt-5 mb-2 font-semibold">Room Type</p>
-            {roomsData.map((item) => (
+            {roomsData && roomsData.map((item) => (
               <button
                 onClick={() => {gettingRoomDetailHandler(item)}}
                 className="border border-gray-300 py-1 px-2 mr-2 rounded-lg hover:bg-gray-100"
@@ -101,6 +105,8 @@ const SingleHotel = () => {
         <PriceComponent item={currentRoomData} isAvail = {isAvail} />
       </div>
       <Email />
+      </div>
+      {showSuccessBox && <Success />}
     </div>
   );
 };

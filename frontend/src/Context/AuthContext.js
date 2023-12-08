@@ -7,6 +7,7 @@ export const AuthContextProvider = ({ children }) => {
   const [typeSearch , setTypeSearch] = useState("")
   const [currentUser , setCurrentUser] = useState(null)
   const [singleHotelData , setSingleHotelData] = useState(null)
+  const [showSuccessBox , setShowSuccessBox] = useState(false)
   const [text , setText] = useState("")
   const [date, setDate] = useState([
     {
@@ -30,7 +31,9 @@ export const AuthContextProvider = ({ children }) => {
         text,
         setText,
         typeSearch,
-        setTypeSearch
+        setTypeSearch,
+        showSuccessBox,
+        setShowSuccessBox
       }}
     >
       {children}

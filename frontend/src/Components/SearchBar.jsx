@@ -11,31 +11,31 @@ const SearchBar = () => {
   const { setSearchTerm, date, setDate } = useContext(AuthContext);
   const navigate = useNavigate();
   const [openDate, setOpenDate] = useState(false);
-  const [openRooms, setOpenRooms] = useState(false);
+  // const [openRooms, setOpenRooms] = useState(false);
   const [city, setCity] = useState("");
-  const [roomsOption, setRoomsOption] = useState({
-    adult: 1,
-    children: 0,
-    room: 1,
-  });
+  // const [roomsOption, setRoomsOption] = useState({
+  //   adult: 1,
+  //   children: 0,
+  //   room: 1,
+  // });
 
-  const handleClick = (name, operation) => {
-    setRoomsOption((prev) => {
-      return {
-        ...prev,
-        [name]:
-          operation === "d" ? roomsOption[name] - 1 : roomsOption[name] + 1,
-      };
-    });
-  };
+  // const handleClick = (name, operation) => {
+  //   setRoomsOption((prev) => {
+  //     return {
+  //       ...prev,
+  //       [name]:
+  //         operation === "d" ? roomsOption[name] - 1 : roomsOption[name] + 1,
+  //     };
+  //   });
+  // };
 
   const SearchHandler = async () => {
     setSearchTerm(city);
     navigate("/hotels");
   };
   return (
-    <div className="w-10/12 absolute -bottom-7">
-      <div className="flex items-center border-4 rounded-md border-amber-400 w-full gap-1 bg-amber-400 text-black h-14">
+    <div className="absolute -bottom-7 w-11/12">
+      <div className="flex items-center border-4 rounded-md border-amber-400 w-8/12 gap-1 bg-amber-400 text-black h-14 m-auto">
         <div className="bg-white flex-1 flex items-center rounded-md pl-1 w-full h-full">
           <HotelOutlined className="text-gray-500" />
           <input
@@ -75,7 +75,7 @@ const SearchBar = () => {
           )}
         </div>
 
-        <div className="bg-white flex-1 flex items-center rounded-md pl-1 w-full h-full relative cursor-pointer">
+        {/* <div className="bg-white flex-1 flex items-center rounded-md pl-1 w-full h-full relative cursor-pointer">
           <Person className="text-gray-500" />
           <span
             className="w-full focus:ring-0 text-gray-500 border-0 px-2"
@@ -170,7 +170,7 @@ const SearchBar = () => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
 
         <div
           onClick={SearchHandler}

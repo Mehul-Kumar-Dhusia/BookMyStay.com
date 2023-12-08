@@ -6,6 +6,7 @@ const authRoute = require('./Routes/auth')
 const hotelRoute = require('./Routes/hotel')
 const roomRoute = require('./Routes/room')
 const userRoute = require('./Routes/user')
+const bookingRoute = require('./Routes/booking')
 const cookieParser = require('cookie-parser')
 
 const app = express()
@@ -18,6 +19,7 @@ app.use('/api/auth' , authRoute)
 app.use('/api/hotels' , hotelRoute)
 app.use('/api/rooms' , roomRoute)
 app.use('/api/users' , userRoute)
+app.use('/api/booking' , bookingRoute)
 
 
 const connect = async () => {
